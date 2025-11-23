@@ -1,0 +1,84 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Cabin Kiosk – Home</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <script src="js/launchers.js" defer></script>
+</head>
+<body>
+  <div class="header">
+    <div class="header-title" onclick="goHome()" style="cursor:pointer;">Cabin Kiosk</div>
+    <div class="header-sub">Today's weather: 24°C ☀️ · Tomorrow: 22°C 🌤️</div>
+  </div>
+
+  <div class="section-title">Enjoy your stay!</div>
+
+  <div class="section-title" style="color:#fff;font-size:1.6rem;">Entertainment</div>
+  <div class="section-sub">Movies, games and music for your stay.</div>
+
+  <div class="grid">
+    <div class="card">
+      <div class="card-label">Plex</div>
+      <div class="card-title">Film & TV</div>
+      <div class="card-text">
+        Browse films and TV shows from the library.
+      </div>
+      <button onmousedown="openPlex()">Open Plex</button>
+    </div>
+
+    <div class="card">
+      <div class="card-label">RetroBat and Steam</div>
+      <div class="card-title">Gaming</div>
+      <div class="card-text">
+        Fire up RetroBat for arcade/console games or Steam for modern PC games.
+      </div>
+      <button onmousedown="openRetroBat()">RetroBat</button>
+      <button onmousedown="openSteam()">Steam</button>
+    </div>
+
+    <div class="card">
+      <div class="card-label">Spotify</div>
+      <div class="card-title">Music</div>
+      <div class="card-text">
+        Launch Spotify to stream music from the cabin.<br />
+        Use your phone to sign in through QR code.
+      </div>
+      <button onmousedown="openSpotify()">Open Spotify</button>
+    </div>
+  </div>
+
+  <div class="section-title" style="color:#fff;font-size:1.6rem;">Property Information</div>
+  <div class="section-sub">Find your way around the cabin and the region.</div>
+
+  <div class="grid">
+    <div class="card">
+      <div class="card-label">Map</div>
+      <div class="card-title">Local map</div>
+      <div class="card-text">
+        View a simple overview of the property and where the cabin sits relative to the road.
+      </div>
+      <button onmousedown="goMap()">Open Map</button>
+    </div>
+
+    <div class="card">
+      <div class="card-label">Gallery</div>
+      <div class="card-title">Photos</div>
+      <div class="card-text">
+        Browse photos from around the cabin and property.
+      </div>
+      <button onmousedown="goGallery()">Open Gallery</button>
+    </div>
+
+    <div class="card">
+      <div class="card-label">Emergency</div>
+      <div class="card-title">Emergency Info</div>
+      <div class="card-text">
+        Important numbers and property details to help in an emergency.
+      </div>
+      <button onmousedown="goEmergency()">View Emergency</button>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,76 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Gallery – Cabin Kiosk</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <script src="js/main.js"></script>
+  <script src="js/launchers.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      let fs, path;
+      try {
+        fs = require('fs');
+        path = require('path');
+      } catch (e) {
+        console.warn("Node integration not available.", e);
+        return;
+      }
+
+      const container = document.getElementById('gallery-grid');
+      const dir = "C:/CabinKiosk/Slideshow";
+
+      let files;
+      try {
+        files = fs.readdirSync(dir, { withFileTypes: true });
+      } catch (e) {
+        container.innerHTML = "<div style='padding:24px;'>Slideshow folder not found:<br><strong>" + dir + "</strong></div>";
+        return;
+      }
+
+      const exts = ['.jpg','.jpeg','.png','.gif','.bmp','.webp'];
+      const images = files
+        .filter(f => f.isFile() && exts.includes(path.extname(f.name).toLowerCase()))
+        .map(f => path.join(dir, f.name));
+
+      if (images.length === 0) {
+        container.innerHTML = "<div style='padding:24px;'>No images found in:<br><strong>" + dir + "</strong></div>";
+        return;
+      }
+
+      window.viewerImages = images.map(fullPath =>
+        "file:///" + fullPath.replace(/\\/g, '/')
+      );
+
+      images.forEach((fullPath, index) => {
+        const url = "file:///" + fullPath.replace(/\\/g, '/');
+
+        const item = document.createElement("div");
+        item.className = "gallery-item";
+        item.dataset.gallerySrc = url;
+
+        const img = document.createElement("img");
+        img.src = url;
+
+        item.appendChild(img);
+        item.addEventListener("click", () => openViewer(index));
+        container.appendChild(item);
+      });
+    });
+  </script>
+</head>
+<body>
+  <div class="header">
+    <div class="header-title" onclick="goHome()" style="cursor:pointer;">Cabin Kiosk</div>
+    <div class="header-sub">Gallery</div>
+  </div>
+
+  <div id="gallery-grid" class="gallery-grid"></div>
+
+  <div id="viewer-backdrop" class="viewer-backdrop" onclick="closeViewer()">
+    <img id="viewer-image" class="viewer-image" />
+    <div class="viewer-hint">Tap anywhere to close</div>
+  </div>
+</body>
+</html>
